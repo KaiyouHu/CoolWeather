@@ -5,9 +5,9 @@
     <version value="1"/>
 
     <list>
-        <mapping class="com.study.kaiyouhu.coolweather.android.db.Province"/>
-        <mapping class="com.study.kaiyouhu.coolweather.android.db.City"/>
-        <mapping class="com.study.kaiyouhu.coolweather.android.db.County"/>
+        <mapping class="com.study.kaiyouhu.coolweather.db.Province"/>
+        <mapping class="com.study.kaiyouhu.coolweather.db.City"/>
+        <mapping class="com.study.kaiyouhu.coolweather.db.County"/>
 
     </list>
 
