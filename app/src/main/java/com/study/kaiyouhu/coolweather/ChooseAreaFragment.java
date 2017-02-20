@@ -1,5 +1,6 @@
 package com.study.kaiyouhu.coolweather;
 
+import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.app.ProgressDialog;
 import android.os.Bundle;
@@ -17,6 +18,7 @@ import com.study.kaiyouhu.coolweather.db.City;
 import com.study.kaiyouhu.coolweather.db.County;
 import com.study.kaiyouhu.coolweather.db.Province;
 import com.study.kaiyouhu.coolweather.util.HttpUtil;
+import com.study.kaiyouhu.coolweather.util.LogUtil;
 import com.study.kaiyouhu.coolweather.util.Utility;
 
 import org.litepal.crud.DataSupport;
@@ -88,6 +90,17 @@ public class ChooseAreaFragment extends Fragment {
                 }else if (currentLevel == LEVEL_CITY){
                     selectCity = cityList.get(position);
                     queryCounties();
+                }else if (currentLevel == LEVEL_COUNTY){
+
+                    LogUtil.d("MainActivity:","County choose passed");
+                    for(int i=0;i<countyList.size();i++)
+                        LogUtil.d("MainActivity:"+i,countyList.get(i).getWeatherId());
+                    String weatherId = countyList.get(position).getWeatherId();
+                    Intent intent = new Intent(getActivity(),WeatherActivity.class);
+                    intent.putExtra("weather_id",weatherId);
+                    LogUtil.d("MainActivity:",weatherId);
+                    startActivity(intent);
+                    getActivity().finish();
                 }
             }
         });
@@ -108,7 +121,9 @@ public class ChooseAreaFragment extends Fragment {
 
     //查询全国所有的省份
     private void queryProvinces(){
+        LogUtil.d("MainActivity:","Title set before");
         titleText.setText("中国");
+        LogUtil.d("MainActivity:","Title set after");
         backButton.setVisibility(View.GONE);
         provinceList = DataSupport.findAll(Province.class);
         if (provinceList.size() > 0){
